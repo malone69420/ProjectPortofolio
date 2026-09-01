@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusFlow | Task Tracker</title>
+  <style>
+    :root { --navy:#152238; --blue:#2563eb; --pale:#eff6ff; --line:#e5e7eb; --muted:#64748b; }
+    * { box-sizing:border-box; } body { margin:0; background:#f8fafc; color:var(--navy); font:16px Inter,Segoe UI,Arial,sans-serif; }
+    main { width:min(760px, calc(100% - 32px)); margin:64px auto; }
+    header { margin-bottom:28px; } .eyebrow { color:var(--blue); font-size:.75rem; font-weight:800; text-transform:uppercase; letter-spacing:.12em; }
+    h1 { font-size:clamp(2rem,7vw,3.6rem); letter-spacing:-.06em; margin:8px 0; } header p { color:var(--muted); margin:0; }
+    .panel { background:white; border:1px solid var(--line); border-radius:16px; box-shadow:0 14px 35px #0f172a0a; padding:18px; }
+    form { display:flex; gap:10px; } input { min-width:0; flex:1; border:1px solid #cbd5e1; border-radius:9px; padding:13px; font:inherit; }
+    button { border:0; border-radius:9px; padding:12px 15px; font:inherit; font-weight:750; cursor:pointer; } .primary { background:var(--blue); color:white; }
+    .toolbar { display:flex; align-items:center; justify-content:space-between; margin:24px 0 12px; } .filters { display:flex; gap:7px; flex-wrap:wrap; }
+    .filter { color:var(--muted); background:white; border:1px solid var(--line); } .filter.active { color:#1745a1; background:var(--pale); border-color:#bfdbfe; }
+    #count { color:var(--muted); font-size:.9rem; } ul { list-style:none; padding:0; margin:0; display:grid; gap:9px; }
+    li { display:flex; align-items:center; gap:12px; background:white; border:1px solid var(--line); border-radius:12px; padding:14px; }
+    li.done .task-name { color:var(--muted); text-decoration:line-through; } input[type="checkbox"] { flex:0 0 auto; width:19px; height:19px; accent-color:var(--blue); }
+    .task-name { flex:1; } .delete { color:#b91c1c; background:#fff1f2; padding:7px 10px; font-size:.84rem; }
+    .empty { color:var(--muted); text-align:center; padding:34px 0; } footer { color:var(--muted); font-size:.86rem; text-align:center; margin-top:20px; }
+    @media(max-width:460px) { main { margin:36px auto; } form { display:grid; grid-template-columns:1fr; } .toolbar { align-items:flex-start; gap:12px; flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">JavaScript project</div>
+      <h1>FocusFlow.</h1>
+      <p>A simple task tracker that saves your work in this browser.</p>
+    </header>
+
+    <section class="panel" aria-label="Add a task">
+      <form id="task-form">
+        <input id="task-input" maxlength="100" placeholder="What needs to be done?" aria-label="New task" required />
+        <button class="primary" type="submit">Add task</button>
+      </form>
+    </section>
+
+    <div class="toolbar">
+      <div class="filters">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="active">Active</button>
+        <button class="filter" data-filter="done">Done</button>
+      </div>
+      <span id="count"></span>
+    </div>
+    <ul id="task-list" aria-live="polite"></ul>
+    <footer>Your tasks are stored locally on this device.</footer>
+  </main>
+  <script>
+    const form = document.querySelector('#task-form');
+    const input = document.querySelector('#task-input');
+    const list = document.querySelector('#task-list');
+    const count = document.querySelector('#count');
+    const filters = document.querySelectorAll('.filter');
+    let tasks = JSON.parse(localStorage.getItem('focusflow-tasks') || '[]');
+    let filter = 'all';
+    const save = () => localStorage.setItem('focusflow-tasks', JSON.stringify(tasks));
+    function render() {
+      const visible = tasks.filter(task => {
+        return filter === 'all' || (filter === 'done' ? task.done : !task.done);
+      });
+
+      list.innerHTML = visible.length
+        ? visible.map(task => `
+            <li class="${task.done ? 'done' : ''}">
+              <input type="checkbox" data-toggle="${task.id}" ${task.done ? 'checked' : ''} aria-label="Mark ${task.name} complete">
+              <span class="task-name">${escapeHtml(task.name)}</span>
+              <button class="delete" data-delete="${task.id}">Delete</button>
+            </li>
+          `).join('')
+        : '<li class="empty">No tasks here yet.</li>';
+
+      const active = tasks.filter(task => !task.done).length;
+      count.textContent = `${active} active task${active === 1 ? '' : 's'}`;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const name = input.value.trim();
+      if (!name) return;
+      tasks.unshift({ id: Date.now(), name, done: false });
+      save();
+      render();
+      form.reset();
+      input.focus();
+    });
+
+    list.addEventListener('click', event => {
+      const id = Number(event.target.dataset.delete);
+      if (!id) return;
+      tasks = tasks.filter(task => task.id !== id);
+      save();
+      render();
+    });
+
+    list.addEventListener('change', event => {
+      const id = Number(event.target.dataset.toggle);
+      if (!id) return;
+      tasks = tasks.map(task => task.id === id ? { ...task, done: !task.done } : task);
+      save();
+      render();
+    });
+
+    filters.forEach(button => button.addEventListener('click', () => {
+      filter = button.dataset.filter;
+      filters.forEach(item => item.classList.toggle('active', item === button));
+      render();
+    }));
+    render();
+  </script>
+</body>
+</html>
