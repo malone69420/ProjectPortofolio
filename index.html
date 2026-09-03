@@ -6,36 +6,45 @@
   <meta name="description" content="Portfolio of RM Dharma Adjie Suprapto, IT Support and Infrastructure professional." />
   <title>RM Dharma Adjie Suprapto | IT Support</title>
   <style>
-    :root { --ink:#132238; --muted:#627087; --line:#dfe7ef; --blue:#1463d8; --pale:#eff6ff; --card:#fff; }
+    /* 1. Theme colors for the portfolio. */
+    :root { --ink:#f6f7ff; --muted:#aeb9d3; --line:#26324d; --blue:#38bdf8; --purple:#8b5cf6; --pale:#18233b; --card:#111b31; --page:#090f20; }
     * { box-sizing:border-box; } html { scroll-behavior:smooth; }
-    body { margin:0; font-family:Inter,Segoe UI,Arial,sans-serif; color:var(--ink); background:#f7fafd; line-height:1.6; }
+    /* 2. Base page layout and navigation bar. */
+    body { margin:0; font-family:Inter,Segoe UI,Arial,sans-serif; color:var(--ink); background:var(--page); line-height:1.6; }
     nav { display:flex; align-items:center; justify-content:space-between; max-width:1100px; margin:auto; padding:22px 28px; }
-    .brand { font-weight:800; letter-spacing:.02em; } nav a { color:var(--muted); text-decoration:none; margin-left:20px; font-size:.94rem; }
+    .brand { font-weight:850; letter-spacing:.02em; background:linear-gradient(100deg,var(--blue),var(--purple)); -webkit-background-clip:text; background-clip:text; color:transparent; } nav a { color:#dbe5f9; text-decoration:none; margin-left:20px; font-size:.94rem; font-weight:650; } nav a:hover { color:var(--blue); }
     .wrap { max-width:1100px; margin:auto; padding:0 28px; }
-    .hero { min-height:510px; display:grid; place-items:center; padding:64px 0; background:radial-gradient(circle at 78% 18%,#dbeafe 0,transparent 31%),#f7fafd; }
+    /* 3. Hero section: introduction text, buttons, and profile photo. */
+    .hero { min-height:570px; display:grid; place-items:center; padding:64px 0; background:radial-gradient(ellipse at 82% 48%,#26304b 0,transparent 42%),radial-gradient(circle at 18% 12%,#0ea5e933 0,transparent 25%),var(--page); }
     .hero-grid { width:100%; display:grid; grid-template-columns:1.5fr .8fr; gap:48px; align-items:center; }
     .eyebrow { color:var(--blue); font-weight:750; text-transform:uppercase; letter-spacing:.12em; font-size:.76rem; }
-    h1 { font-size:clamp(2.6rem,7vw,5.5rem); letter-spacing:-.06em; line-height:.96; margin:14px 0 20px; max-width:760px; }
+    h1 { font-size:clamp(2.6rem,7vw,5.5rem); letter-spacing:-.06em; line-height:.96; margin:14px 0 20px; max-width:760px; background:linear-gradient(100deg,#f8fafc 35%,#38bdf8 65%,#a78bfa); -webkit-background-clip:text; background-clip:text; color:transparent; }
     h2 { font-size:clamp(1.8rem,3vw,2.6rem); letter-spacing:-.04em; margin:0 0 16px; }
     .lead { font-size:1.13rem; color:var(--muted); max-width:650px; margin:0 0 28px; }
-    .button { display:inline-block; padding:12px 18px; background:var(--blue); color:#fff; border-radius:9px; text-decoration:none; font-weight:700; transition:transform .18s ease, box-shadow .18s ease; } .button:hover { transform:translateY(-2px); box-shadow:0 8px 18px #1463d833; } .button:active { transform:translateY(1px) scale(.98); }
-    .profile { background:var(--ink); color:#fff; padding:30px; border-radius:22px; box-shadow:0 18px 45px #14244026; }
+    .button { display:inline-block; padding:12px 18px; background:linear-gradient(100deg,var(--blue),var(--purple)); color:#fff; border-radius:999px; text-decoration:none; font-weight:750; transition:transform .18s ease, box-shadow .18s ease; } .button:hover { transform:translateY(-2px); box-shadow:0 10px 24px #8b5cf655; } .button:active { transform:translateY(1px) scale(.98); }
+    .profile { max-width:410px; justify-self:end; align-self:end; }
+    .profile-photo { width:100%; height:auto; display:block; opacity:.84; -webkit-mask-image:radial-gradient(ellipse 72% 74% at 57% 43%,#000 43%,transparent 83%); mask-image:radial-gradient(ellipse 72% 74% at 57% 43%,#000 43%,transparent 83%); }
     .profile p { color:#cbd6e4; margin:8px 0 0; } .profile strong { font-size:1.08rem; }
+    /* 4. Content sections: About, Experience, Projects, and Skills. */
     section { padding:82px 0; } .section-intro { color:var(--muted); max-width:680px; margin:0 0 32px; }
     .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .card { background:var(--card); border:1px solid var(--line); padding:23px; border-radius:14px; }
+    .card { background:var(--card); border:1px solid var(--line); padding:23px; border-radius:14px; box-shadow:0 14px 34px #0000001c; }
     .card h3 { margin:0 0 9px; font-size:1.03rem; } .card p { color:var(--muted); margin:0; font-size:.95rem; }
-    .experience { display:grid; gap:16px; } .role { background:#fff; border-left:4px solid var(--blue); border-radius:0 13px 13px 0; padding:25px; box-shadow:0 5px 18px #14244008; }
+    .experience { display:grid; gap:16px; } .role { background:var(--card); border-left:4px solid var(--blue); border-radius:0 13px 13px 0; padding:25px; box-shadow:0 5px 18px #00000026; }
     .role-top { display:flex; justify-content:space-between; gap:20px; align-items:start; } .role h3 { margin:0; font-size:1.2rem; } .role small { color:var(--muted); white-space:nowrap; }
     .role p { color:var(--muted); margin:12px 0 0; } .role ul { color:var(--muted); margin:15px 0 0; padding-left:20px; } .role li { margin:6px 0; }
-    .skills { display:flex; flex-wrap:wrap; gap:10px; } .tag { background:var(--pale); color:#174b9c; padding:8px 12px; border-radius:999px; font-size:.9rem; font-weight:650; } .project-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
-    footer { padding:44px 28px; text-align:center; background:var(--ink); color:#fff; } footer p { color:#cbd6e4; margin:7px 0 0; } footer .button { margin:16px 5px 0; background:#fff; color:var(--ink); }
+    .skills { display:flex; flex-wrap:wrap; gap:10px; } .tag { background:var(--pale); color:#b9e6ff; padding:8px 12px; border-radius:999px; font-size:.9rem; font-weight:650; } .project-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
+    .tool-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; } .tool-card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 14px; text-align:center; font-weight:700; font-size:.9rem; } .tool-icon { width:46px; height:46px; display:grid; place-items:center; margin:0 auto 10px; border-radius:13px; background:var(--blue); color:#fff; font-weight:800; font-size:1.05rem; } .tool-card:nth-child(2) .tool-icon { background:#0f6cbd; } .tool-card:nth-child(3) .tool-icon { background:#107c10; } .tool-card:nth-child(4) .tool-icon { background:#6b4fbb; } .tool-card:nth-child(5) .tool-icon { background:#f25022; } .tool-card:nth-child(6) .tool-icon { background:#24292f; } .tool-card:nth-child(7) .tool-icon { background:#f7b500; color:#1f2937; } .tool-card:nth-child(8) .tool-icon { background:#2563eb; }
+    .language-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:0 0 28px; } .language-card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; } .language-card h3 { margin:0 0 8px; } .language-card p { margin:0; color:var(--muted); font-size:.94rem; }
+    /* 5. Contact footer and mobile layout rules. */
+    footer { padding:44px 28px; text-align:center; background:#070b17; color:#fff; border-top:1px solid var(--line); } footer p { color:#cbd6e4; margin:7px 0 0; } footer .button { margin:16px 5px 0; background:linear-gradient(100deg,var(--blue),var(--purple)); color:#fff; }
     .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; } .reveal.visible { opacity:1; transform:translateY(0); }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; } .reveal { opacity:1; transform:none; } }
-    @media (max-width:700px) { nav a { display:none; } .hero-grid,.grid { grid-template-columns:1fr; } .hero { min-height:auto; } .role-top { display:block; } .role small { display:block; margin-top:7px; } section { padding:60px 0; } }
+    @media (max-width:700px) { nav a { display:none; } .hero-grid,.grid,.language-grid { grid-template-columns:1fr; } .tool-grid { grid-template-columns:repeat(2,1fr); } .hero { min-height:auto; } .role-top { display:block; } .role small { display:block; margin-top:7px; } section { padding:60px 0; } }
   </style>
 </head>
 <body>
+  <!-- Navigation links to page sections. -->
   <nav>
     <span class="brand">RM DHARMA ADJIE</span>
     <div>
@@ -47,21 +56,22 @@
   </nav>
 
   <main>
+    <!-- Hero section: main introduction and profile photo. -->
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <div class="eyebrow">IT Support & Infrastructure</div>
+          <div class="eyebrow">About me</div>
           <h1>Keeping people and technology moving.</h1>
-          <p class="lead">I’m RM Dharma Adjie Suprapto, an IT support and infrastructure professional with hands-on experience in enterprise endpoint support, troubleshooting, reporting, and Microsoft-based automation.</p>
+          <p class="lead">I’m RM Dharma Adjie Suprapto, an IT support and infrastructure professional with hands-on experience in enterprise endpoint support, troubleshooting, reporting, and Microsoft-based automation. I’m also building practical coding skills through projects with HTML, CSS, and JavaScript.</p>
           <a class="button" href="#experience">View my experience</a>
         </div>
         <aside class="profile">
-          <strong>What I work with</strong>
-          <p>Enterprise support<br>Endpoint management<br>IT operations & reporting<br>Workflow automation</p>
+          <img class="profile-photo" src="profile-editorial.png" alt="Editorial portrait of RM Dharma Adjie Suprapto" />
         </aside>
       </div>
     </section>
 
+    <!-- About section: IT focus and strengths. -->
     <section id="about">
       <div class="wrap">
         <div class="eyebrow">About</div>
@@ -75,6 +85,7 @@
       </div>
     </section>
 
+    <!-- Experience section: work history and results. -->
     <section id="experience">
       <div class="wrap">
         <div class="eyebrow">Experience</div>
@@ -108,6 +119,7 @@
       </div>
     </section>
 
+    <!-- Projects section: coding skills, project details, and live demo. -->
     <section id="projects">
       <div class="wrap">
         <div class="eyebrow">Coding projects</div>
@@ -116,38 +128,53 @@
         <div class="skills" style="margin:0 0 28px">
           <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">GitHub</span><span class="tag">GitHub Pages</span><span class="tag">Browser Storage</span>
         </div>
+        <div class="language-grid">
+          <article class="language-card"><h3>HTML</h3><p>I use HTML to structure pages with headings, sections, forms, links, and project content.</p></article>
+          <article class="language-card"><h3>CSS</h3><p>I use CSS to create layouts, responsive designs, colors, spacing, and simple animations.</p></article>
+          <article class="language-card"><h3>JavaScript</h3><p>I use JavaScript to add interactivity—such as task creation, filters, button actions, and browser storage.</p></article>
+        </div>
         <div class="grid">
           <article class="card">
             <h3>FocusFlow Task Tracker</h3>
             <p>A responsive task tracker where users can add, complete, filter, and delete tasks. It uses browser storage so tasks remain after a refresh.</p>
             <div class="project-actions">
               <a class="button" href="https://malone69420.github.io/ProjectPortofolio/task-tracker.html" target="_blank" rel="noopener">Open live demo</a>
-              <a class="button" href="https://github.com/malone69420/ProjectPortofolio/blob/main/index.html" target="_blank" rel="noopener">View code on GitHub</a>
+              <a class="button" href="https://github.com/malone69420/ProjectPortofolio/blob/main/task-tracker.html" target="_blank" rel="noopener">View code on GitHub</a>
             </div>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- Skills section: support tools and coding technologies. -->
     <section id="skills">
       <div class="wrap">
-        <div class="eyebrow">Skills</div>
-        <h2>Tools I use.</h2>
-        <div class="skills">
-          <span class="tag">Windows Support</span><span class="tag">ServiceNow</span><span class="tag">Microsoft Intune</span><span class="tag">Microsoft Entra ID</span><span class="tag">Endpoint Support</span><span class="tag">IT Asset Management</span><span class="tag">LAN & Network Checks</span><span class="tag">Power Automate</span><span class="tag">SharePoint</span><span class="tag">Microsoft Lists</span><span class="tag">Power BI</span><span class="tag">IT Documentation</span>
+        <div class="eyebrow">Tools I use</div>
+        <h2>Technology I work with.</h2>
+        <p class="section-intro">A mix of enterprise support tools, Microsoft platforms, and web-development foundations.</p>
+        <div class="tool-grid">
+          <div class="tool-card"><div class="tool-icon">SN</div>ServiceNow</div>
+          <div class="tool-card"><div class="tool-icon">IN</div>Microsoft Intune</div>
+          <div class="tool-card"><div class="tool-icon">ID</div>Entra ID</div>
+          <div class="tool-card"><div class="tool-icon">PA</div>Power Automate</div>
+          <div class="tool-card"><div class="tool-icon">BI</div>Power BI</div>
+          <div class="tool-card"><div class="tool-icon">GH</div>GitHub</div>
+          <div class="tool-card"><div class="tool-icon">JS</div>JavaScript</div>
+          <div class="tool-card"><div class="tool-icon">WB</div>Windows Support</div>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <strong>Let’s connect.</strong>
-    <p>Learn more about my background and projects.</p>
+    <strong>Interested in working together?</strong>
+    <p>Feel free to contact me about IT support, hardware, or web projects.</p>
     <a class="button" href="mailto:dharmal9336@gmail.com">Email me</a>
     <a class="button" href="https://www.linkedin.com/in/rm-dharma-adjie-suprapto-09286820a/" target="_blank" rel="noopener">LinkedIn</a>
     <a class="button" href="RM-Dharma-Adjie-CV.pdf" download>Download CV</a>
   </footer>
   <script>
+    // Scroll animation for revealing page sections.
     const animatedItems = document.querySelectorAll('section:not(.hero), .card, .role');
     animatedItems.forEach(item => item.classList.add('reveal'));
     const observer = new IntersectionObserver(entries => {
@@ -162,3 +189,4 @@
   </script>
 </body>
 </html>
+
