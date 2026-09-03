@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FocusFlow | Task Tracker</title>
   <style>
+    /* 1. Theme colors for the task tracker. */
     :root { --navy:#152238; --blue:#2563eb; --pale:#eff6ff; --line:#e5e7eb; --muted:#64748b; }
     * { box-sizing:border-box; } body { margin:0; background:#f8fafc; color:var(--navy); font:16px Inter,Segoe UI,Arial,sans-serif; }
+    /* 2. Page layout, form, filters, and task-list styles. */
     main { width:min(760px, calc(100% - 32px)); margin:64px auto; }
     header { margin-bottom:28px; } .eyebrow { color:var(--blue); font-size:.75rem; font-weight:800; text-transform:uppercase; letter-spacing:.12em; }
     h1 { font-size:clamp(2rem,7vw,3.6rem); letter-spacing:-.06em; margin:8px 0; } header p { color:var(--muted); margin:0; }
@@ -24,6 +26,7 @@
   </style>
 </head>
 <body>
+  <!-- App layout: heading, task input, filters, and task list. -->
   <main>
     <header>
       <div class="eyebrow">JavaScript project</div>
@@ -50,14 +53,18 @@
     <footer>Your tasks are stored locally on this device.</footer>
   </main>
   <script>
+    // 1. Select page elements used by the app.
     const form = document.querySelector('#task-form');
     const input = document.querySelector('#task-input');
     const list = document.querySelector('#task-list');
     const count = document.querySelector('#count');
     const filters = document.querySelectorAll('.filter');
+    // 2. Load saved tasks from browser storage.
     let tasks = JSON.parse(localStorage.getItem('focusflow-tasks') || '[]');
     let filter = 'all';
+    // 3. Save tasks to browser storage.
     const save = () => localStorage.setItem('focusflow-tasks', JSON.stringify(tasks));
+    // 4. Render the visible task list.
     function render() {
       const visible = tasks.filter(task => {
         return filter === 'all' || (filter === 'done' ? task.done : !task.done);
@@ -77,6 +84,7 @@
       count.textContent = `${active} active task${active === 1 ? '' : 's'}`;
     }
 
+    // 5. Convert special characters into safe text.
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text;
@@ -119,3 +127,4 @@
   </script>
 </body>
 </html>
+
